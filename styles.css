@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+html, body {
+background-image: url("https://images-assets.nasa.gov/image/PIA21519/PIA21519~orig.jpg");
+background-size: cover;
+background-color:gray;
+}
+
+.nav ul {
+    margin:0;
+}
+
+.nav li {
+    display:inline;
+}
+
+.nav a {
+    display: inline-block;
+    padding: .5em;
+    color: white;
+    text-decoration: none;  
+}
+
+.nav a:hover {
+    color: rgba(0, 139, 139,.9);
+}
+
+.nav {
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.main-header {
+    background-color: rgba(0,0,0,.4);   
+    background-blend-mode: multiply;
+    padding-bottom: 30px;
+}
+
+.main_title {
+    margin: 0;
+    text-align: center;
+    color:white;
+    font-size: 3em;
+}
+
+.subtitle {
+    margin: 0;
+    text-align: center;
+    color: rgba(255,255,255,.5);
+    font-size: 1.75em;
+}
+
+.main_section p {
+    color: white;
+    text-align: center;
+    font-size: 2em;
+    padding: 50px;
+
+}
