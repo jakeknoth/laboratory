@@ -1,4 +1,4 @@
-# labratory
+# Laboratory
 Here to learn!
 
 
