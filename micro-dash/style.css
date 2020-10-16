@@ -1,0 +1,278 @@
+* {
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("images/background.jpg");
+  background-position: cover;
+}
+
+body {
+  background-color: rgba(255, 255, 255, 0.4);
+  background-blend-mode: multiply;
+}
+
+.nav ul {
+  margin: 0;
+}
+
+.nav li {
+  display: inline;
+}
+
+.nav a {
+  display: inline-block;
+  padding: 0.5em;
+  color: white;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: rgba(0, 139, 139, 0.9);
+}
+
+.main-nav {
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: lighter;
+  border-bottom: 1pm solid white;
+}
+
+.main-nav li {
+  padding: 0 5%;
+}
+.main-header {
+  background-color: #366f7a;
+  background-blend-mode: multiply;
+  background-size: cover;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
+.system_name {
+  text-align: center;
+  margin: 0;
+  font-size: 2.5em;
+}
+
+.content_section {
+  margin: 1em;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5em;
+}
+
+.section_header {
+  text-align: center;
+  font-size: 2em;
+  margin: 1em;
+}
+
+.rigs-header {
+  text-align: center;
+}
+
+.rig_stats {
+  flex: auto;
+}
+
+.main_footer {
+  background-color: #565656;
+  color: white;
+  padding: 0.25em 0;
+}
+
+.main_footer_container {
+  display: flex;
+  align-items: center;
+}
+
+.main_footer_container ul {
+  flex-grow: 1;
+  text-align: end;
+}
+
+.footer_nav li {
+  padding: 0 0.5em;
+}
+
+.footer_nav img {
+  width: 40px;
+}
+
+.btn {
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.67em 0.67em;
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: white;
+  background-color: gray;
+  border: none;
+  border-radius: 0.3em;
+  font-weight: bold;
+}
+
+.btn-primary:disabled {
+  background-color: gray;
+  color: lightgray;
+}
+
+.btn-primary:disabled:hover {
+  background-color: gray;
+  color: lightgray;
+}
+
+.btn-primary:hover {
+  background-color: #366f7a;
+}
+
+.shop-item {
+  margin: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: multiply;
+  background-size: cover;
+  border-top-right-radius: 2%;
+  border-bottom-right-radius: 2%;
+  border-top-left-radius: 2%;
+  border-bottom-left-radius: 2%;
+}
+
+.button-item {
+  margin: 30px;
+  background-size: cover;
+}
+
+.shop-item-title {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em;
+  margin: 1em;
+}
+
+.shop-item-image {
+  height: 300px;
+}
+
+.shop-item-details {
+  align-items: left;
+  padding: 5px;
+  font-size: 1.1em;
+}
+
+.shop-item-subtitle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 15px;
+}
+
+.summary-detail {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+.detail {
+  text-align: left;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  font-size: 0.85em;
+  font-weight: lighter;
+}
+
+.subtitle-detail {
+  text-align: left;
+  margin-left: 0.5em;
+  font-size: 0.85em;
+  font-weight: lighter;
+}
+
+.shop-item-price {
+  flex-grow: 1;
+}
+
+.shop-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.cart-quantity-input {
+  height: 34px;
+  width: 50px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0;
+  text-align: center;
+  font-size: 1.2em;
+  margin-right: 24px;
+}
+
+.btn-prep {
+  display: block;
+  margin: 20px auto 20px auto;
+  font-size: 1.2em;
+}
+
+.btn-find {
+  display: block;
+  margin: 20px auto 20px auto;
+  font-size: 1.2em;
+}
+
+.btn-units {
+  display: block;
+  margin: 20px auto 20px auto;
+  font-size: 1.2em;
+}
+.btn-brokerManager {
+  display: block;
+  margin: 20px auto 20px auto;
+  font-size: 1.2em;
+}
+
+.btn-hardCost {
+  display: block;
+  margin: 20px auto 20px auto;
+  font-size: 1.2em;
+}
+
+.btn-retail {
+  display: block;
+  margin: 20px auto 20px auto;
+  font-size: 1.2em;
+}
+
+.btn-purchase {
+  display: block;
+  margin: 20px auto 20px auto;
+  font-size: 1.4em;
+}
+
+h1 {
+  color: white;
+}
+
+body {
+  color: white;
+}

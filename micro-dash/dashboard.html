@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BP Bidding</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Linking CSS-->
+    <script src="dashboard.js" async></script>
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="nav main-nav">
+        <!-- <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="store.html">STORE</a></li>
+        </ul> -->
+      </nav>
+      <h1 class="system_name system_name_large">Microservices Control Dash</h1>
+    </header>
+    <section class="container content-section"></section>
+    <div class="shop-items">
+      <div class="shop-item">
+         <h2 class="section_header">Services Status</h2>
+         <div class="button-item">
+            <button class="btn btn-primary btn-prep" type="button">Get System Status</button>
+          </div>
+          <div class="services-online">
+            <h2>Online: </h2>
+          </div>
+          <div class="services-offline">
+            <h2>Offline: </h2>
+        </div>
+      </div>
+      <div class="shop-item">
+        <h2 class="section_header">Connected Brokers</h2>
+        <div class="button-item">
+            <button class="btn btn-primary btn-units" type="button">Get Broker Status</button>
+        </div>
+        <div class="button-item">
+            <button class="btn btn-primary btn-brokerManager" type="button">Update Broker Management Cache</button>
+        </div>
+        <div class="brokers-online">
+            <h2>Online: </h2>
+          </div>
+          <div class="brokers-unresponsive">
+            <h2>Unresponsive: </h2>
+          </div>
+          <div class="brokers-offline">
+            <h2>Offline: </h2>
+        </div>
+      </div>
+ <div class="shop-item">
+  <h2 class="section_header">Assets</h2>
+  <div class="button-item">
+    <button class="btn btn-primary btn-find" type="button">Update Asset Cache</button>
+  </div>
+  <div class="enabled-services">
+    <h2>Enabled Services: </h2>
+  </div>
+  <div class="enabled-sheets">
+    <h2>Enabled Sheets: </h2>
+</div>
+</div>
+
+    
+  </body>
+</html>
