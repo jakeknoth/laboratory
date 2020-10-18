@@ -14,20 +14,23 @@ const getSystemStatusClicked = async () => {
   document.querySelector(".btn-prep").innerText = "Getting Status...";
   document.querySelector(".btn-prep").disabled = true;
 
+  /* Clear out old data */
+  const existingServices = document.querySelectorAll(".service");
+  console.log("Clearing old rows", existingServices.length);
+  for (const service of existingServices) {
+    console.log(service);
+    service.remove();
+  }
+
   try {
     const response = await fetch(
       "http://localhost:3000/tech/stateReporting/all",
       {
         method: "GET",
+        Origin: "http://10.0.0.242",
       }
     );
     const data = await response.json(); // Powered by Nich! Lol thanks!
-
-    /* Clear out old data */
-    const existingServices = document.querySelectorAll(".service");
-    for (const service of existingServices) {
-      service.remove();
-    }
 
     /**
      * Display Services Status
@@ -36,22 +39,62 @@ const getSystemStatusClicked = async () => {
     // Loop through resultUnits
     for (const [service, info] of Object.entries(data)) {
       // Create Element for Service
-      const serviceElement = document.createElement("div");
+      const serviceElement = document.createElement("tr");
+      serviceElement.className = `service`;
 
       // Add to DOM
-      if (info.state === "unresponsive") {
-        serviceElement.innerHTML = `<p class="service summary-detail ">${service} ----- (${info.responseTime} ms)</p>`;
-        document
-          .querySelectorAll(".services-offline")[0]
-          .appendChild(serviceElement);
+      if (info.responsive) {
+        if (info.enable === "Yes") {
+          // Define new table row
+          serviceElement.innerHTML = `           
+             <td>🟢</td>
+             <td class="td-service">${service}</td>
+             <td>${info.working}</td>
+             <td>${info.responseTime} (ms)</td>`;
+          document
+            .querySelectorAll(".services-online")[0]
+            .appendChild(serviceElement);
+        } else if (info.enable === "Hold") {
+          // Define new table row
+          serviceElement.innerHTML = `           
+             <td>🟠</td>
+             <td class="td-service">${service}</td>
+             <td>${info.working}</td>
+             <td>${info.responseTime} (ms)</td>`;
+          document
+            .querySelectorAll(".services-online")[0]
+            .appendChild(serviceElement);
+        } else {
+          // Define new table row
+          serviceElement.innerHTML = `           
+            <td>❗</td>
+            <td class="td-service">${service}</td>
+            <td>${info.working}</td>
+            <td>${info.responseTime} (ms)</td>`;
+          document
+            .querySelectorAll(".services-online")[0]
+            .appendChild(serviceElement);
+        }
       } else {
-        serviceElement.innerHTML = `<p class="service summary-detail">${service} -----    ${info.state} ----- (${info.responseTime} ms)</p>`;
-        document
-          .querySelectorAll(".services-online")[0]
-          .appendChild(serviceElement);
+        if (info.enable === "Yes") {
+          serviceElement.innerHTML = `           
+            <td>🔴</td>  
+            <td class="td-service">${service}</td>
+            <td>${info.responseTime} (ms)</td>`;
+
+          document
+            .querySelectorAll(".services-offline")[0]
+            .appendChild(serviceElement);
+        } else {
+          serviceElement.innerHTML = `     
+            <td>⚫</td>      
+            <td class="td-service">${service}</td>`;
+          document
+            .querySelectorAll(".services-offline")[0]
+            .appendChild(serviceElement);
+        }
       }
     }
-
     document.querySelector(".btn-prep").innerText = "Refresh System Status";
     document.querySelector(".btn-prep").disabled = false;
   } catch (error) {
@@ -59,72 +102,6 @@ const getSystemStatusClicked = async () => {
     document.querySelector(".btn-prep").innerText = "Get System Status";
     document.querySelector(".btn-find").disabled = false;
   }
-};
-
-/**
- * Update Assets Operation
- */
-const updateAssetsClicked = async () => {
-  console.log("Updating Assets");
-  // Update Button Status
-  document.querySelector(".btn-find").innerText = "Updating Assets";
-  document.querySelector(".btn-find").disabled = true;
-  // API call to Server for finding Bid
-  try {
-    let response = await fetch(
-      "http://localhost:3000/tech/assetDiscovery/update",
-      {
-        method: "GET",
-      }
-    );
-    response = await response.json(); // Powered by Nich! Lol thanks!
-    console.log("Message: ", response);
-
-    // Update Button to reflect success
-    document.querySelector(".btn-find").innerText = "Update Asset Cache";
-
-    /* Clear out old data */
-    const existingServices = document.querySelectorAll(".enabled");
-    for (const service of existingServices) {
-      service.remove();
-    }
-
-    /* Display Enabled Services */
-    for (const [service, info] of Object.entries(response.services)) {
-      // Create Element for Service
-      const serviceElement = document.createElement("div");
-
-      // Add to DOM
-      if (info.enable === "Yes") {
-        serviceElement.innerHTML = `<p class="enabled summary-detail ">${service}</p>`;
-        document
-          .querySelectorAll(".enabled-services")[0]
-          .appendChild(serviceElement);
-      }
-    }
-
-    /* Display Enabled Sheets */
-    for (const [sheet, info] of Object.entries(response.sheets)) {
-      // Create Element for Service
-      const sheetElement = document.createElement("div");
-
-      // Add to DOM
-      if (info.connectViaBroker === "Yes") {
-        sheetElement.innerHTML = `<p class="enabled summary-detail ">${info.friendlyName}</p>`;
-        document
-          .querySelectorAll(".enabled-sheets")[0]
-          .appendChild(sheetElement);
-      }
-    }
-
-    /* Display Enable Sheets */
-  } catch (error) {
-    console.log("Error Loading Bid:", error);
-    document.querySelector(".btn-find").innerText = "Find Bid to Calculate";
-    document.querySelector(".btn-find").disabled = false;
-  }
-  document.querySelector(".btn-find").innerText = "Update Asset Cache";
-  document.querySelector(".btn-find").disabled = false;
 };
 
 /**
@@ -154,27 +131,35 @@ const brokerStateClicked = async () => {
     /* Display Enabled Services */
     for (const [service, info] of Object.entries(response)) {
       // Create Element for Service
-      const serviceElement = document.createElement("div");
+      const serviceElement = document.createElement("tr");
+      serviceElement.className = `broker`;
 
       // Add to DOM
-
       switch (info.state) {
         case "disconnected":
-          serviceElement.innerHTML = `<p class="broker summary-detail ">${service}</p>`;
+          serviceElement.innerHTML = `           
+            <td>⚫</td>
+            <td class="td-service">${service}</td>`;
+          document
+            .querySelectorAll(".brokers-offline")[0]
+            .appendChild(serviceElement);
+          break;
+        case "unresponsive":
+          serviceElement.innerHTML = `           
+            <td>🔴</td>
+            <td class="td-service">${service}</td>`;
           document
             .querySelectorAll(".brokers-offline")[0]
             .appendChild(serviceElement);
           break;
 
-        case "unresponsive":
-          serviceElement.innerHTML = `<p class="broker summary-detail ">${service}</p>`;
-          document
-            .querySelectorAll(".brokers-unresponsive")[0]
-            .appendChild(serviceElement);
-          break;
-
         default:
-          serviceElement.innerHTML = `<p class="broker summary-detail ">${service} ----- State: ${info.state} | Que: ${info.que} | Errors: ${info.errorCount}</p>`;
+          serviceElement.innerHTML = `           
+            <td>🟢</td>
+            <td class="td-service">${service}</td>
+            <td>${info.state}</td>
+            <td>${info.que}</td>
+            <td>${info.errorCount}</td>`;
           document
             .querySelectorAll(".brokers-online")[0]
             .appendChild(serviceElement);
@@ -190,6 +175,79 @@ const brokerStateClicked = async () => {
     document.querySelector(".btn-units").innerText = "Refresh Broker Status";
     document.querySelector(".btn-units").disabled = false;
   }
+};
+
+/**
+ * Update Assets Operation
+ */
+const updateAssetsClicked = async () => {
+  console.log("Updating Assets");
+  // Update Button Status
+  document.querySelector(".btn-find").innerText = "Updating Assets";
+  document.querySelector(".btn-find").disabled = true;
+
+  /* Clear out old data */
+  const existingServices = document.querySelectorAll(".enabled");
+  for (const service of existingServices) {
+    service.remove();
+  }
+
+  // API call to Server for finding Bid
+  try {
+    let response = await fetch(
+      "http://localhost:3000/tech/assetDiscovery/update",
+      {
+        method: "GET",
+      }
+    );
+    response = await response.json(); // Powered by Nich! Lol thanks!
+    console.log("Assets: ", response);
+
+    // Update Button to reflect success
+    document.querySelector(".btn-find").innerText = "Update Asset Cache";
+
+    /* Display Enabled Services */
+    for (const [service, info] of Object.entries(response.services)) {
+      // Create Element for Service
+      const serviceElement = document.createElement("div");
+
+      // Add to DOM
+      if (info.enable === "Yes") {
+        serviceElement.innerHTML = `<p class="enabled summary-detail ">${service}</p>`;
+        document
+          .querySelectorAll(".enabled-services")[0]
+          .appendChild(serviceElement);
+      }
+      if (info.enable === "Hold") {
+        serviceElement.innerHTML = `<p class="enabled summary-detail ">${service}</p>`;
+        document
+          .querySelectorAll(".paused-services")[0]
+          .appendChild(serviceElement);
+      }
+    }
+
+    /* Display Enabled Sheets */
+    for (const [sheet, info] of Object.entries(response.sheets)) {
+      // Create Element for Service
+      const sheetElement = document.createElement("div");
+
+      // Add to DOM
+      if (info.connectViaBroker === "Yes") {
+        sheetElement.innerHTML = `<p class="enabled summary-detail ">${info.friendlyName}</p>`;
+        document
+          .querySelectorAll(".enabled-sheets")[0]
+          .appendChild(sheetElement);
+      }
+    }
+
+    /* Display Enable Sheets */
+  } catch (error) {
+    console.log("Error Loading Bid:", error);
+    document.querySelector(".btn-find").innerText = "Find Bid to Calculate";
+    document.querySelector(".btn-find").disabled = false;
+  }
+  document.querySelector(".btn-find").innerText = "Update Asset Cache";
+  document.querySelector(".btn-find").disabled = false;
 };
 
 /**

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BP Bidding</title>
+    <title>Microservices Server Dash</title>
     <link rel="stylesheet" href="style.css" />
     <!-- Linking CSS-->
     <script src="dashboard.js" async></script>
+    <link rel="icon" 
+    href="/images/favicon.ico"  
+    type="image/x-icon">
   </head>
   <body>
     <header class="main-header">
@@ -15,7 +18,7 @@
           <li><a href="store.html">STORE</a></li>
         </ul> -->
       </nav>
-      <h1 class="system_name system_name_large">Microservices Control Dash</h1>
+      <h1 class="system_name system_name_large">Microservices Status & Control Dash</h1>
     </header>
     <section class="container content-section"></section>
     <div class="shop-items">
@@ -24,12 +27,34 @@
          <div class="button-item">
             <button class="btn btn-primary btn-prep" type="button">Get System Status</button>
           </div>
-          <div class="services-online">
+
+          <div class="shop-item">
             <h2>Online: </h2>
-          </div>
-          <div class="services-offline">
-            <h2>Offline: </h2>
+            <table class="services-online">
+            <tr>
+                <th></th>
+                <th class="td-service">Service</th>
+                <th>Working</th>
+                <th>Response Time (ms)</th>
+            </tr>
+            </table>
+            <p>🟢 = Enabled</p>
+            <p>🟠 = Paused</p>
+            <p> ❗ = Disabled but active (Error State)</p>
         </div>
+      
+        <div class="shop-item">
+            <h2>Offline:</h2>
+            <table class="services-offline">
+              <tr>
+                  <th></th>
+                  <th class="td-service">Service</th>
+                  <th>Response Time (ms)</th>
+              </tr>
+              </table>
+              <p>⚫ = Disabled</p>
+              <p>🔴 = Enabled but Unresponsive (Error State)</p>
+          </div>
       </div>
       <div class="shop-item">
         <h2 class="section_header">Connected Brokers</h2>
@@ -39,26 +64,52 @@
         <div class="button-item">
             <button class="btn btn-primary btn-brokerManager" type="button">Update Broker Management Cache</button>
         </div>
-        <div class="brokers-online">
+
+          <div class="shop-item">
             <h2>Online: </h2>
-          </div>
-          <div class="brokers-unresponsive">
-            <h2>Unresponsive: </h2>
-          </div>
-          <div class="brokers-offline">
-            <h2>Offline: </h2>
+            <table class="brokers-online">
+            <tr>
+                <th></th>
+                <th class="td-service">Broker's Sheet</th>
+                <th>Working</th>
+                <th>Que Length</th>
+                <th>Error Count</th>
+            </tr>
+            </table>
+            <p>🟢 = Enabled</p>
+            <p> ❗ = Disabled but active (Error State)</p>
         </div>
+
+        <div class="shop-item">
+          <h2>Offline: </h2>
+          <table class="brokers-offline">
+          <tr>
+              <th></th>
+              <th class="td-service">Broker's Sheet</th>
+          </tr>
+          </table>
+          <p>⚫ = Disabled</p>
+          <p>🔴 = Enabled but Unresponsive (Error State)</p>
+      </div>
+
       </div>
  <div class="shop-item">
   <h2 class="section_header">Assets</h2>
   <div class="button-item">
     <button class="btn btn-primary btn-find" type="button">Update Asset Cache</button>
   </div>
+  <div class="shop-item">
   <div class="enabled-services">
     <h2>Enabled Services: </h2>
   </div>
+  <div class="paused-services">
+    <h2>Paused Services: </h2>
+  </div>
+</div>
+<div class="shop-item">
   <div class="enabled-sheets">
     <h2>Enabled Sheets: </h2>
+</div>
 </div>
 </div>
 
